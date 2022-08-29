@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:riverpod_iap/iap_provider.dart';
 
 void main() {
@@ -51,7 +52,18 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               style: const TextStyle(fontSize: 30),
             ),
           ));
+    }
+    if (isLoading) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     } else {
+      ProductDetails product = iapWatch.value!.products['consumable']!;
       return Scaffold(
           appBar: AppBar(
             title: Text(widget.title),
@@ -64,9 +76,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                       backgroundColor: Colors.green[800],
                       primary: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(iapProvider.notifier).purchase(product);
+                    },
                     child: Text(
-                      iapWatch.value!.products['consumable']!.title,
+                      product.title,
                     ),
                   ),
                 ));

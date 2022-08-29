@@ -88,6 +88,14 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
         consumables: consumables));
   }
 
+  Future<void> purchase(ProductDetails product) {
+    PurchaseParam purchaseParam = PurchaseParam(
+      productDetails: product,
+    );
+    return _inAppPurchase.buyConsumable(
+        purchaseParam: purchaseParam, autoConsume: _kAutoConsume);
+  }
+
   Future<void> consume(String id) async {
     state = const AsyncLoading();
     await ConsumableStore.consume(id);
@@ -99,6 +107,7 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
     // IMPORTANT!! Always verify purchase details before delivering the product.
     await ConsumableStore.save(purchaseDetails.purchaseID!);
     final List<String> consumables = await ConsumableStore.load();
+    initState();
   }
 
   void handleError(IAPError error) {
