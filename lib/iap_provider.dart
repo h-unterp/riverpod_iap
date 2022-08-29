@@ -19,7 +19,7 @@ final bool _kAutoConsume = Platform.isIOS || true;
 class IAPState with _$IAPState {
   const factory IAPState(
       {@Default([]) List<String> notFoundIds,
-      @Default(<ProductDetails>[]) List<ProductDetails> products,
+      @Default(<String, ProductDetails>{}) Map<String, ProductDetails> products,
       @Default(<PurchaseDetails>[]) List<PurchaseDetails> purchases,
       @Default(<String>[]) List<String> consumables,
       @Default(false) bool isAvailable,
@@ -82,7 +82,9 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
     final List<String> consumables = await ConsumableStore.load();
     state = AsyncValue.data(IAPState(
         isAvailable: isAvailable,
-        products: productDetailResponse.productDetails,
+        products: {
+          for (var each in productDetailResponse.productDetails) each.id: each
+        },
         consumables: consumables));
   }
 

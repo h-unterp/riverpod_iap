@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$IAPState {
   List<String> get notFoundIds => throw _privateConstructorUsedError;
-  List<ProductDetails> get products => throw _privateConstructorUsedError;
+  Map<String, ProductDetails> get products =>
+      throw _privateConstructorUsedError;
   List<PurchaseDetails> get purchases => throw _privateConstructorUsedError;
   List<String> get consumables => throw _privateConstructorUsedError;
   bool get isAvailable => throw _privateConstructorUsedError;
@@ -34,7 +35,7 @@ abstract class $IAPStateCopyWith<$Res> {
       _$IAPStateCopyWithImpl<$Res>;
   $Res call(
       {List<String> notFoundIds,
-      List<ProductDetails> products,
+      Map<String, ProductDetails> products,
       List<PurchaseDetails> purchases,
       List<String> consumables,
       bool isAvailable,
@@ -66,7 +67,7 @@ class _$IAPStateCopyWithImpl<$Res> implements $IAPStateCopyWith<$Res> {
       products: products == freezed
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<ProductDetails>,
+              as Map<String, ProductDetails>,
       purchases: purchases == freezed
           ? _value.purchases
           : purchases // ignore: cast_nullable_to_non_nullable
@@ -95,7 +96,7 @@ abstract class _$$_IAPStateCopyWith<$Res> implements $IAPStateCopyWith<$Res> {
   @override
   $Res call(
       {List<String> notFoundIds,
-      List<ProductDetails> products,
+      Map<String, ProductDetails> products,
       List<PurchaseDetails> purchases,
       List<String> consumables,
       bool isAvailable,
@@ -129,7 +130,7 @@ class __$$_IAPStateCopyWithImpl<$Res> extends _$IAPStateCopyWithImpl<$Res>
       products: products == freezed
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<ProductDetails>,
+              as Map<String, ProductDetails>,
       purchases: purchases == freezed
           ? _value._purchases
           : purchases // ignore: cast_nullable_to_non_nullable
@@ -155,7 +156,8 @@ class __$$_IAPStateCopyWithImpl<$Res> extends _$IAPStateCopyWithImpl<$Res>
 class _$_IAPState implements _IAPState {
   const _$_IAPState(
       {final List<String> notFoundIds = const [],
-      final List<ProductDetails> products = const <ProductDetails>[],
+      final Map<String, ProductDetails> products =
+          const <String, ProductDetails>{},
       final List<PurchaseDetails> purchases = const <PurchaseDetails>[],
       final List<String> consumables = const <String>[],
       this.isAvailable = false,
@@ -173,12 +175,12 @@ class _$_IAPState implements _IAPState {
     return EqualUnmodifiableListView(_notFoundIds);
   }
 
-  final List<ProductDetails> _products;
+  final Map<String, ProductDetails> _products;
   @override
   @JsonKey()
-  List<ProductDetails> get products {
+  Map<String, ProductDetails> get products {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_products);
+    return EqualUnmodifiableMapView(_products);
   }
 
   final List<PurchaseDetails> _purchases;
@@ -246,7 +248,7 @@ class _$_IAPState implements _IAPState {
 abstract class _IAPState implements IAPState {
   const factory _IAPState(
       {final List<String> notFoundIds,
-      final List<ProductDetails> products,
+      final Map<String, ProductDetails> products,
       final List<PurchaseDetails> purchases,
       final List<String> consumables,
       final bool isAvailable,
@@ -255,7 +257,7 @@ abstract class _IAPState implements IAPState {
   @override
   List<String> get notFoundIds;
   @override
-  List<ProductDetails> get products;
+  Map<String, ProductDetails> get products;
   @override
   List<PurchaseDetails> get purchases;
   @override

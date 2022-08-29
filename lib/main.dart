@@ -53,22 +53,23 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           ));
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Text(
-                      'You have pushed the button this many times:',
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : Center(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green[800],
+                      primary: Colors.white,
                     ),
-                  ],
-                ),
-              ),
-      );
+                    onPressed: () {},
+                    child: Text(
+                      iapWatch.value!.products['consumable']!.title,
+                    ),
+                  ),
+                ));
     }
   }
 }
