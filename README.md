@@ -1,6 +1,6 @@
 # riverpod_iap
 
-A new Flutter project.
+Riverpod provider for flutter in app purchase
 
 ## Getting Started
 Inspiration: https://github.com/flutter/plugins/blob/main/packages/in_app_purchase/in_app_purchase/example/README.md
