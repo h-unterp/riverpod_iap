@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -34,6 +35,7 @@ final iapProvider =
 class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
+  late VoidCallback onPurchased;
 
   IAPNotifier() : super(const AsyncLoading()) {
     initState();
@@ -60,13 +62,6 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
       return;
     }
 
-    if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
-          _inAppPurchase
-              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-      await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
-    }
-
     final ProductDetailsResponse productDetailResponse =
         await _inAppPurchase.queryProductDetails({"consumable"});
     if (productDetailResponse.error != null) {
@@ -88,7 +83,9 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
         consumables: consumables));
   }
 
-  Future<void> purchase(ProductDetails product) {
+  Future<bool> purchase(
+      ProductDetails product, VoidCallback onPurchased) async {
+    this.onPurchased = onPurchased;
     PurchaseParam purchaseParam = PurchaseParam(
       productDetails: product,
     );
@@ -107,6 +104,7 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
     // IMPORTANT!! Always verify purchase details before delivering the product.
     await ConsumableStore.save(purchaseDetails.purchaseID!);
     final List<String> consumables = await ConsumableStore.load();
+    onPurchased();
     initState();
   }
 

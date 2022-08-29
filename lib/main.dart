@@ -77,7 +77,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                       primary: Colors.white,
                     ),
                     onPressed: () {
-                      ref.read(iapProvider.notifier).purchase(product);
+                      ref.read(iapProvider.notifier).purchase(product, (() {
+                        print("purchased");
+                      }));
                     },
                     child: Text(
                       product.title,
