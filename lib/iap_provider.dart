@@ -142,6 +142,9 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
             return;
           }
         }
+        if (purchaseDetails.status == PurchaseStatus.canceled) {
+          initState();
+        }
 
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
