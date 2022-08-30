@@ -78,7 +78,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                     ),
                     onPressed: () {
                       ref.read(iapProvider.notifier).purchase(product, (() {
-                        print("purchased");
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Purchase Delivered"),
+                        ));
                       }));
                     },
                     child: Text(

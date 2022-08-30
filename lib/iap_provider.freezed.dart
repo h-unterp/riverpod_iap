@@ -23,6 +23,7 @@ mixin _$IAPState {
   List<String> get consumables => throw _privateConstructorUsedError;
   bool get isAvailable => throw _privateConstructorUsedError;
   bool get purchasePending => throw _privateConstructorUsedError;
+  VoidCallback? get onPurchased => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IAPStateCopyWith<IAPState> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $IAPStateCopyWith<$Res> {
       List<PurchaseDetails> purchases,
       List<String> consumables,
       bool isAvailable,
-      bool purchasePending});
+      bool purchasePending,
+      VoidCallback? onPurchased});
 }
 
 /// @nodoc
@@ -58,6 +60,7 @@ class _$IAPStateCopyWithImpl<$Res> implements $IAPStateCopyWith<$Res> {
     Object? consumables = freezed,
     Object? isAvailable = freezed,
     Object? purchasePending = freezed,
+    Object? onPurchased = freezed,
   }) {
     return _then(_value.copyWith(
       notFoundIds: notFoundIds == freezed
@@ -84,6 +87,10 @@ class _$IAPStateCopyWithImpl<$Res> implements $IAPStateCopyWith<$Res> {
           ? _value.purchasePending
           : purchasePending // ignore: cast_nullable_to_non_nullable
               as bool,
+      onPurchased: onPurchased == freezed
+          ? _value.onPurchased
+          : onPurchased // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
     ));
   }
 }
@@ -100,7 +107,8 @@ abstract class _$$_IAPStateCopyWith<$Res> implements $IAPStateCopyWith<$Res> {
       List<PurchaseDetails> purchases,
       List<String> consumables,
       bool isAvailable,
-      bool purchasePending});
+      bool purchasePending,
+      VoidCallback? onPurchased});
 }
 
 /// @nodoc
@@ -121,6 +129,7 @@ class __$$_IAPStateCopyWithImpl<$Res> extends _$IAPStateCopyWithImpl<$Res>
     Object? consumables = freezed,
     Object? isAvailable = freezed,
     Object? purchasePending = freezed,
+    Object? onPurchased = freezed,
   }) {
     return _then(_$_IAPState(
       notFoundIds: notFoundIds == freezed
@@ -147,6 +156,10 @@ class __$$_IAPStateCopyWithImpl<$Res> extends _$IAPStateCopyWithImpl<$Res>
           ? _value.purchasePending
           : purchasePending // ignore: cast_nullable_to_non_nullable
               as bool,
+      onPurchased: onPurchased == freezed
+          ? _value.onPurchased
+          : onPurchased // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
     ));
   }
 }
@@ -161,7 +174,8 @@ class _$_IAPState implements _IAPState {
       final List<PurchaseDetails> purchases = const <PurchaseDetails>[],
       final List<String> consumables = const <String>[],
       this.isAvailable = false,
-      this.purchasePending = false})
+      this.purchasePending = false,
+      this.onPurchased})
       : _notFoundIds = notFoundIds,
         _products = products,
         _purchases = purchases,
@@ -205,10 +219,12 @@ class _$_IAPState implements _IAPState {
   @override
   @JsonKey()
   final bool purchasePending;
+  @override
+  final VoidCallback? onPurchased;
 
   @override
   String toString() {
-    return 'IAPState(notFoundIds: $notFoundIds, products: $products, purchases: $purchases, consumables: $consumables, isAvailable: $isAvailable, purchasePending: $purchasePending)';
+    return 'IAPState(notFoundIds: $notFoundIds, products: $products, purchases: $purchases, consumables: $consumables, isAvailable: $isAvailable, purchasePending: $purchasePending, onPurchased: $onPurchased)';
   }
 
   @override
@@ -226,7 +242,9 @@ class _$_IAPState implements _IAPState {
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
             const DeepCollectionEquality()
-                .equals(other.purchasePending, purchasePending));
+                .equals(other.purchasePending, purchasePending) &&
+            (identical(other.onPurchased, onPurchased) ||
+                other.onPurchased == onPurchased));
   }
 
   @override
@@ -237,7 +255,8 @@ class _$_IAPState implements _IAPState {
       const DeepCollectionEquality().hash(_purchases),
       const DeepCollectionEquality().hash(_consumables),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(purchasePending));
+      const DeepCollectionEquality().hash(purchasePending),
+      onPurchased);
 
   @JsonKey(ignore: true)
   @override
@@ -252,7 +271,8 @@ abstract class _IAPState implements IAPState {
       final List<PurchaseDetails> purchases,
       final List<String> consumables,
       final bool isAvailable,
-      final bool purchasePending}) = _$_IAPState;
+      final bool purchasePending,
+      final VoidCallback? onPurchased}) = _$_IAPState;
 
   @override
   List<String> get notFoundIds;
@@ -266,6 +286,8 @@ abstract class _IAPState implements IAPState {
   bool get isAvailable;
   @override
   bool get purchasePending;
+  @override
+  VoidCallback? get onPurchased;
   @override
   @JsonKey(ignore: true)
   _$$_IAPStateCopyWith<_$_IAPState> get copyWith =>

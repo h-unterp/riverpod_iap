@@ -85,6 +85,7 @@ class IAPNotifier extends StateNotifier<AsyncValue<IAPState>> {
 
   Future<bool> purchase(
       ProductDetails product, VoidCallback onPurchased) async {
+    state = const AsyncLoading();
     this.onPurchased = onPurchased;
     PurchaseParam purchaseParam = PurchaseParam(
       productDetails: product,
